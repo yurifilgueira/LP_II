@@ -1,4 +1,6 @@
-package entities;
+package model.entities;
+
+import model.exceptions.InvalidGradeException;
 
 public class Exam {
 
@@ -9,6 +11,14 @@ public class Exam {
     }
 
     public Exam(Double gradePart1, Double gradePart2) {
+
+        if(!verifyGrade(gradePart1)) {
+            throw new InvalidGradeException("The grade must be less than or equal to five.");
+        }
+        if (!verifyGrade(gradePart2)) {
+            throw new InvalidGradeException("The grade must be less than or equal to five.");
+        }
+
         this.gradePart1 = gradePart1;
         this.gradePart2 = gradePart2;
     }
@@ -39,6 +49,10 @@ public class Exam {
 
         return (gradePart1 + gradePart2);
 
+    }
+
+    public boolean verifyGrade(double grade){
+        return grade <= 5;
     }
 
     @Override
